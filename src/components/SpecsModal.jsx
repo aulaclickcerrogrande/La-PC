@@ -48,11 +48,13 @@ const SpecsModal = ({ isOpen, onClose, component }) => {
 
                     <div className="grid grid-cols-1 gap-4">
                         {Object.entries(component.specs).map(([key, value]) => (
-                            <div key={key} className="flex flex-col md:flex-row md:items-center md:justify-between p-5 bg-white/5 rounded-xl border border-white/5 hover:border-tech-purple/30 transition-colors group gap-2">
-                                <span className="text-xs text-gray-400 uppercase tracking-[0.2em] font-bold">{key}</span>
+                            <div key={key} className="flex flex-col md:flex-row p-5 bg-white/5 rounded-xl border border-white/5 hover:border-tech-purple/30 transition-colors group gap-4 md:gap-12">
+                                <span className="text-[10px] md:text-xs text-tech-purple/70 uppercase tracking-[0.2em] font-black md:w-48 shrink-0 pt-1 lg:w-64">
+                                    {key}
+                                </span>
                                 <RenderDescription
                                     text={value}
-                                    className="text-sm md:text-base font-medium text-gray-200 group-hover:text-white transition-colors leading-relaxed md:text-right md:max-w-2xl"
+                                    className="text-sm md:text-base font-medium text-gray-200 group-hover:text-white transition-colors leading-relaxed flex-1"
                                 />
                             </div>
                         ))}
