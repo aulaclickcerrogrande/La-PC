@@ -313,16 +313,16 @@ const AdminPanel = () => {
                         </Box>
 
                         <Box sx={{ display: 'flex', alignItems: 'center', gap: 3 }}>
-                            <div className="flex p-0.5 bg-black/40 rounded-lg border border-white/5">
+                            <div className="flex gap-1 p-1 bg-black/40 rounded-xl border border-white/5">
                                 <button
                                     onClick={() => setView('internal')}
-                                    className={`px - 4 py - 1.5 rounded - md text - [10px] font - black uppercase tracking - wider transition - all ${view === 'internal' ? 'bg-tech-purple text-white shadow-lg shadow-purple-500/20' : 'text-gray-500 hover:text-gray-300'} `}
+                                    className={`px-4 py-1.5 rounded-lg text-[10px] font-black uppercase tracking-wider transition-all ${view === 'internal' ? 'bg-tech-purple text-white shadow-lg shadow-purple-500/20' : 'text-gray-500 hover:text-gray-300'}`}
                                 >
                                     Internos
                                 </button>
                                 <button
                                     onClick={() => setView('external')}
-                                    className={`px - 4 py - 1.5 rounded - md text - [10px] font - black uppercase tracking - wider transition - all ${view === 'external' ? 'bg-tech-purple text-white shadow-lg shadow-purple-500/20' : 'text-gray-500 hover:text-gray-300'} `}
+                                    className={`px-4 py-1.5 rounded-lg text-[10px] font-black uppercase tracking-wider transition-all ${view === 'external' ? 'bg-tech-purple text-white shadow-lg shadow-purple-500/20' : 'text-gray-500 hover:text-gray-300'}`}
                                 >
                                     Periféricos
                                 </button>
