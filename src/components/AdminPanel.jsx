@@ -8,6 +8,34 @@ import { Plus, Trash2, Save, ImagePlus, ChevronDown, ChevronUp, Maximize2, BookO
 import Crossword from './Crossword';
 import { getAllComponents, updateComponent, collections, uploadImage } from '../supabase/db';
 
+const OptimizedInput = ({ value, onSave, ...props }) => {
+    const [localValue, setLocalValue] = React.useState(value || '');
+
+    React.useEffect(() => {
+        setLocalValue(value || '');
+    }, [value]);
+
+    const handleBlur = () => {
+        if (localValue !== value) {
+            onSave(localValue);
+        }
+    };
+
+    return (
+        <TextField
+            {...props}
+            value={localValue}
+            onChange={(e) => setLocalValue(e.target.value)}
+            onBlur={handleBlur}
+            onKeyDown={(e) => {
+                if (e.key === 'Enter' && !props.multiline) {
+                    handleBlur();
+                }
+            }}
+        />
+    );
+};
+
 const AdminPanel = () => {
     const [view, setView] = useState('external');
     const [components, setComponents] = useState([]);
@@ -381,10 +409,10 @@ const AdminPanel = () => {
 
                                             {/* Text Fields */}
                                             <Grid item xs={12} md={7}>
-                                                <TextField
+                                                <OptimizedInput
                                                     fullWidth
                                                     value={comp.name}
-                                                    onChange={(e) => handleUpdate(comp.id, 'name', e.target.value)}
+                                                    onSave={(val) => handleUpdate(comp.id, 'name', val)}
                                                     variant="standard"
                                                     InputProps={{
                                                         disableUnderline: true,
@@ -413,12 +441,12 @@ const AdminPanel = () => {
                                                             </IconButton>
                                                         </Tooltip>
                                                     </Box>
-                                                    <TextField
+                                                    <OptimizedInput
                                                         fullWidth
                                                         size="small"
                                                         multiline
                                                         value={comp.description}
-                                                        onChange={(e) => handleUpdate(comp.id, 'description', e.target.value)}
+                                                        onSave={(val) => handleUpdate(comp.id, 'description', val)}
                                                         variant="outlined"
                                                         sx={{
                                                             '& .MuiOutlinedInput-root': {
@@ -453,12 +481,12 @@ const AdminPanel = () => {
                                                             </IconButton>
                                                         </Tooltip>
                                                     </Box>
-                                                    <TextField
+                                                    <OptimizedInput
                                                         fullWidth
                                                         multiline
                                                         rows={3}
                                                         value={comp.long_description}
-                                                        onChange={(e) => handleUpdate(comp.id, 'long_description', e.target.value)}
+                                                        onSave={(val) => handleUpdate(comp.id, 'long_description', val)}
                                                         variant="outlined"
                                                         sx={{
                                                             '& .MuiOutlinedInput-root': {
@@ -501,12 +529,12 @@ const AdminPanel = () => {
                                                                 <Box key={specIdx} sx={{ mb: 2, p: 2, bgcolor: 'rgba(255,255,255,0.02)', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.05)' }}>
                                                                     <Grid container spacing={2} alignItems="center">
                                                                         <Grid item xs={12} sm={4}>
-                                                                            <TextField
+                                                                            <OptimizedInput
                                                                                 fullWidth
                                                                                 size="small"
                                                                                 label="Etiqueta"
                                                                                 value={key}
-                                                                                onBlur={(e) => handleSpecUpdate(comp.id, key, e.target.value, value)}
+                                                                                onSave={(val) => handleSpecUpdate(comp.id, key, val, value)}
                                                                                 sx={{
                                                                                     '& .MuiOutlinedInput-root': { borderRadius: '8px', color: '#a855f7', fontWeight: 800, fontSize: '0.7rem' },
                                                                                     '& .MuiInputLabel-root': { color: '#a1a1aa', fontSize: '0.7rem' }
@@ -514,13 +542,13 @@ const AdminPanel = () => {
                                                                             />
                                                                         </Grid>
                                                                         <Grid item xs={12} sm={6}>
-                                                                            <TextField
+                                                                            <OptimizedInput
                                                                                 fullWidth
                                                                                 multiline
                                                                                 size="small"
                                                                                 label="Valor / Descripción"
                                                                                 value={value}
-                                                                                onChange={(e) => handleSpecUpdate(comp.id, key, key, e.target.value)}
+                                                                                onSave={(val) => handleSpecUpdate(comp.id, key, key, val)}
                                                                                 helperText="Las imágenes se insertan como links al final"
                                                                                 sx={{
                                                                                     '& .MuiOutlinedInput-root': { borderRadius: '8px', color: 'white', fontSize: '0.8rem' },
@@ -594,12 +622,12 @@ const AdminPanel = () => {
                                                             {(comp.types || []).map((cat, catIdx) => (
                                                                 <Box key={catIdx} sx={{ mb: 3, p: 2, bgcolor: 'rgba(255,255,255,0.03)', borderRadius: '12px', border: '1px solid rgba(168, 85, 247, 0.15)' }}>
                                                                     <Box sx={{ display: 'flex', gap: 1, mb: 2 }}>
-                                                                        <TextField
+                                                                        <OptimizedInput
                                                                             fullWidth
                                                                             size="small"
                                                                             label="Categoría"
                                                                             value={cat.category}
-                                                                            onChange={(e) => handleTypeUpdate(comp.id, catIdx, 'category', e.target.value)}
+                                                                            onSave={(val) => handleTypeUpdate(comp.id, catIdx, 'category', val)}
                                                                             sx={{
                                                                                 '& .MuiOutlinedInput-root': {
                                                                                     borderRadius: '8px',
@@ -619,12 +647,12 @@ const AdminPanel = () => {
                                                                         {cat.items.map((item, itemIdx) => (
                                                                             <Box key={itemIdx} sx={{ mb: 2, p: 1.5, bgcolor: 'rgba(255,255,255,0.02)', borderRadius: '8px', borderLeft: '3px solid #a855f7' }}>
                                                                                 <Box sx={{ display: 'flex', gap: 1, mb: 1 }}>
-                                                                                    <TextField
+                                                                                    <OptimizedInput
                                                                                         fullWidth
                                                                                         size="small"
                                                                                         label="Nombre del Tipo"
                                                                                         value={item.name}
-                                                                                        onChange={(e) => handleTypeItemUpdate(comp.id, catIdx, itemIdx, 'name', e.target.value)}
+                                                                                        onSave={(val) => handleTypeItemUpdate(comp.id, catIdx, itemIdx, 'name', val)}
                                                                                         sx={{
                                                                                             '& .MuiOutlinedInput-root': { borderRadius: '8px', fontSize: '0.85rem', color: 'white', fontWeight: 600 },
                                                                                             '& .MuiInputLabel-root': { color: '#71717a' }
@@ -635,13 +663,13 @@ const AdminPanel = () => {
                                                                                     </IconButton>
                                                                                 </Box>
                                                                                 <Box sx={{ display: 'flex', gap: 1, alignItems: 'flex-start' }}>
-                                                                                    <TextField
+                                                                                    <OptimizedInput
                                                                                         fullWidth
                                                                                         multiline
                                                                                         size="small"
                                                                                         label="Descripción"
                                                                                         value={item.description}
-                                                                                        onChange={(e) => handleTypeItemUpdate(comp.id, catIdx, itemIdx, 'description', e.target.value)}
+                                                                                        onSave={(val) => handleTypeItemUpdate(comp.id, catIdx, itemIdx, 'description', val)}
                                                                                         sx={{
                                                                                             '& .MuiOutlinedInput-root': { borderRadius: '8px', fontSize: '0.8rem', color: '#e4e4e7' },
                                                                                             '& .MuiInputLabel-root': { color: '#71717a' }
@@ -727,12 +755,12 @@ const AdminPanel = () => {
                                                                 <Box key={wIdx} sx={{ mb: 2, p: 2, bgcolor: 'rgba(255,255,255,0.02)', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.05)' }}>
                                                                     <Grid container spacing={2}>
                                                                         <Grid item xs={12} sm={4}>
-                                                                            <TextField
+                                                                            <OptimizedInput
                                                                                 fullWidth
                                                                                 size="small"
                                                                                 label="Palabra"
                                                                                 value={word.word}
-                                                                                onChange={(e) => handleCrosswordUpdate(comp.id, wIdx, 'word', e.target.value.toUpperCase())}
+                                                                                onSave={(val) => handleCrosswordUpdate(comp.id, wIdx, 'word', val.toUpperCase())}
                                                                                 sx={{
                                                                                     '& .MuiOutlinedInput-root': {
                                                                                         borderRadius: '8px',
@@ -748,12 +776,12 @@ const AdminPanel = () => {
                                                                             />
                                                                         </Grid>
                                                                         <Grid item xs={12} sm={8}>
-                                                                            <TextField
+                                                                            <OptimizedInput
                                                                                 fullWidth
                                                                                 size="small"
                                                                                 label="Pista"
                                                                                 value={word.clue}
-                                                                                onChange={(e) => handleCrosswordUpdate(comp.id, wIdx, 'clue', e.target.value)}
+                                                                                onSave={(val) => handleCrosswordUpdate(comp.id, wIdx, 'clue', val)}
                                                                                 sx={{
                                                                                     '& .MuiOutlinedInput-root': {
                                                                                         borderRadius: '8px',
@@ -861,11 +889,11 @@ const AdminPanel = () => {
 
                                             {/* Actions */}
                                             < Grid item xs={12} md={3} sx={{ display: 'flex', flexDirection: 'column', gap: 2, position: 'sticky', top: 24 }}>
-                                                <TextField
+                                                <OptimizedInput
                                                     fullWidth
                                                     label="URL Imagen Principal"
                                                     value={comp.image}
-                                                    onChange={(e) => handleUpdate(comp.id, 'image', e.target.value)}
+                                                    onSave={(val) => handleUpdate(comp.id, 'image', val)}
                                                     size="small"
                                                     variant="filled"
                                                     InputProps={{
