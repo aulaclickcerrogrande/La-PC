@@ -528,7 +528,7 @@ const AdminPanel = () => {
                                                             {Object.entries(comp.specs || {}).map(([key, value], specIdx) => (
                                                                 <Box key={specIdx} sx={{ mb: 2, p: 2, bgcolor: 'rgba(255,255,255,0.02)', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.05)' }}>
                                                                     <Grid container spacing={2} alignItems="center">
-                                                                        <Grid item xs={12} sm={4}>
+                                                                        <Grid item xs={12} sm={2}>
                                                                             <OptimizedInput
                                                                                 fullWidth
                                                                                 size="small"
@@ -541,7 +541,7 @@ const AdminPanel = () => {
                                                                                 }}
                                                                             />
                                                                         </Grid>
-                                                                        <Grid item xs={12} sm={6}>
+                                                                        <Grid item xs={12} sm={8}>
                                                                             <OptimizedInput
                                                                                 fullWidth
                                                                                 multiline
@@ -754,7 +754,7 @@ const AdminPanel = () => {
                                                             {(comp.crossword?.words || []).map((word, wIdx) => (
                                                                 <Box key={wIdx} sx={{ mb: 2, p: 2, bgcolor: 'rgba(255,255,255,0.02)', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.05)' }}>
                                                                     <Grid container spacing={2}>
-                                                                        <Grid item xs={12} sm={4}>
+                                                                        <Grid item xs={12} sm={2}>
                                                                             <OptimizedInput
                                                                                 fullWidth
                                                                                 size="small"
@@ -775,7 +775,7 @@ const AdminPanel = () => {
                                                                                 }}
                                                                             />
                                                                         </Grid>
-                                                                        <Grid item xs={12} sm={8}>
+                                                                        <Grid item xs={12} sm={10}>
                                                                             <OptimizedInput
                                                                                 fullWidth
                                                                                 size="small"
