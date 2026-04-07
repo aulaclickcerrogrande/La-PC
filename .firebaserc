@@ -1,0 +1,15 @@
+{
+  "projects": {
+    "default": "aulaclick-cerrogrande"
+  },
+  "targets": {
+    "aulaclick-cerrogrande": {
+      "hosting": {
+        "main": [
+          "motherboardexplorer"
+        ]
+      }
+    }
+  },
+  "etags": {}
+}

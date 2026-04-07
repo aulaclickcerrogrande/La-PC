@@ -1,0 +1,11 @@
+﻿{
+  "projectId": "aulaclick-cerrogrande",
+  "appId": "1:240179182310:web:64bed1deab1501726d5927",
+  "storageBucket": "aulaclick-cerrogrande.firebasestorage.app",
+  "apiKey": "AIzaSyCcVshqnRBXYIgx90TqtJMpTPxIr-PQ4rQ",
+  "authDomain": "aulaclick-cerrogrande.firebaseapp.com",
+  "messagingSenderId": "240179182310",
+  "measurementId": "G-2FKPZJZMNS",
+  "projectNumber": "240179182310",
+  "version": "2"
+}
