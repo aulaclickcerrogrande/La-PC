@@ -12,7 +12,7 @@ const SpecsModal = ({ isOpen, onClose, component }) => {
                 initial={{ opacity: 0, scale: 0.9, y: 20 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.9, y: 20 }}
-                className="glass-morphism w-full max-w-5xl border border-tech-purple/30 rounded-3xl overflow-hidden shadow-[0_0_50px_rgba(168,85,247,0.2)] max-h-[90vh] overflow-y-auto custom-scrollbar"
+                className="glass-morphism w-full max-w-2xl border border-tech-purple/30 rounded-3xl overflow-hidden shadow-[0_0_50px_rgba(168,85,247,0.2)] max-h-[90vh] overflow-y-auto custom-scrollbar"
             >
                 {/* Modal Header */}
                 <div className="flex items-center justify-between p-4 md:p-6 border-b border-white/10 bg-tech-purple/5 sticky top-0 z-10">
